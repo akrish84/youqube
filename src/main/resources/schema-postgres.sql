@@ -1,0 +1,30 @@
+CREATE TABLE IF NOT EXISTS parties (
+    id VARCHAR(8) NOT NULL PRIMARY KEY,
+    name VARCHAR(50),
+    created_at BIGINT NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS guests (
+    id SERIAL NOT NULL PRIMARY KEY,
+    party_id VARCHAR(8) NOT NULL REFERENCES parties(id) ON DELETE CASCADE,
+    name VARCHAR(50) NOT NULL,
+    rank INTEGER NOT NULL,
+    role VARCHAR(26) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS qubes (
+    id SERIAL NOT NULL PRIMARY KEY,
+    guest_id INTEGER REFERENCES guests(id) ON DELETE CASCADE,
+    link VARCHAR(512) NOT NULL,
+    rank INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS party_id_sequence (
+    id INTEGER NOT NULL PRIMARY KEY,
+    last_used_number INTEGER NOT NULL,
+    cache_count INTEGER NOT NULL,
+    party_id_length INTEGER NOT NULL,
+    max_party_number INTEGER NOT NULL
+)
+
