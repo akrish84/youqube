@@ -1,8 +1,11 @@
 package app.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import app.exceptions.ObjectNotFoundException;
 import app.model.Party;
 import app.repository.PartyRepository;
 
@@ -27,5 +30,13 @@ public class PartyService {
 		
 		return partyRepository.save(party);
 		
+	}
+	
+	public Party getParty(String partyId) throws ObjectNotFoundException {
+		Optional<Party> optionalParty = partyRepository.findById(partyId);
+		if(optionalParty.isEmpty()) {
+			throw new ObjectNotFoundException("Party with Id: " + partyId + " not found" );
+		}
+		return optionalParty.get();
 	}
 }

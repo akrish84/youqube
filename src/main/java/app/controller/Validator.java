@@ -1,6 +1,7 @@
 package app.controller;
 
 import java.util.List;
+import java.util.Set;
 
 
 public class Validator {
@@ -37,6 +38,15 @@ public class Validator {
 		
 		if( number == null || number == 0) {
 			throw new IllegalArgumentException(paramName + " cannot have value 0");
+		}
+	}
+
+	public static void containsCheck(String object, Set<String> options, String paramName) {
+		if(options == null || options.isEmpty()) {
+			throw new IllegalArgumentException("Options to check is empty");
+		}
+		if(!options.contains(object)) {
+			throw new IllegalArgumentException(paramName + " " + object + " not in options: " + options);
 		}
 	}
 	

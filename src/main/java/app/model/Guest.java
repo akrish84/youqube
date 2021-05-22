@@ -4,18 +4,25 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "guests")
 public class Guest {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private long id;
 	
@@ -79,6 +86,13 @@ public class Guest {
 	public void setQubes(List<Qube> qubes) {
 		this.qubes = qubes;
 	}
+
+	@Override
+	public String toString() {
+		return "Guest [id=" + id + ", partyId=" + partyId + ", name=" + name + ", rank=" + rank + ", role=" + role + "]";
+	}
+	
+	
 	
 	
 

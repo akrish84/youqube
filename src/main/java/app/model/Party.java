@@ -57,6 +57,11 @@ public class Party {
 		this.createdAt = createdAt;
 	}
 	
+	@Override
+	public String toString() {
+		return "Party [id=" + id + ", name=" + name + "]";
+	}
+	
 	
 	
 
